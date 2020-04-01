@@ -15,6 +15,12 @@ class HomePage extends StatelessWidget {
         title: Text(HOME_PAGE_TITLE),
       ),
       body: TransactionsList(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: ()=> {
+
+        },
+      ),
     );
   }
 }

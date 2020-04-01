@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pocketwallet/screens/models/expense.dart';
+import 'package:pocketwallet/screens/models/expense_type.dart';
+import 'package:pocketwallet/screens/models/income.dart';
 import 'package:pocketwallet/screens/models/transaction.dart';
 import 'package:pocketwallet/screens/util/currency.dart';
 
@@ -9,15 +12,14 @@ class TransactionsList extends StatefulWidget {
   }
 }
 
+//String source, double value, int month, int year
 class TransactionsState extends State {
   List<Transaction> transactionList = [
-    Transaction(
-      value: 1000.2,
-      type: TransactionType.EXPENSE,
-      description: 'description',
-    ),
-    Transaction(value: 1000.0, type: TransactionType.INCOME),
-    Transaction(value: 100.0, type: TransactionType.INCOME),
+    Expense(ExpenseType.GYM, 120.0, 1, 20),
+    Income('aisdjij', 120.0, 1, 20),
+    Expense(ExpenseType.TRANSPORT, 120.0, 1, 20),
+    Income('aisdjij', 120.0, 1, 20),
+    Income('aisdjij', 120.0, 1, 20),
   ];
 
   @override
@@ -50,9 +52,9 @@ class TransactionCard extends StatelessWidget {
                   convertToCurrencyFormat(_item.value),
                   textScaleFactor: 1.6,
                 ),
-                _item.description != null
+                _item.description() != null
                     ? Text(
-                        _item.description,
+                        _item.description(),
                         style: TextStyle(
                           color: Colors.black54,
                         ),
@@ -74,22 +76,12 @@ class TransactionCard extends StatelessWidget {
     );
   }
 
-  /*
-  * getIconAccordingToTransactionType(),
-          Text(convertToCurrencyFormat(_item.value)),
-          Text(_item.description==null ? "": _item.description )*/
-
   Icon getIconAccordingToTransactionType() {
     Icon iconDefined = Icon(Icons.data_usage, color: Colors.transparent);
-    switch (_item.type) {
-      case TransactionType.INCOME:
-        iconDefined = Icon(Icons.transit_enterexit, color: Colors.green);
-        break;
-      case TransactionType.EXPENSE:
-        iconDefined = Icon(Icons.call_missed_outgoing, color: Colors.red);
-        break;
-      default:
-        break;
+    if(_item is Income){
+      iconDefined = Icon(Icons.transit_enterexit, color: Colors.green);
+    } else if(_item is Expense){
+      iconDefined = Icon(Icons.call_missed_outgoing, color: Colors.red);
     }
     return iconDefined;
   }
