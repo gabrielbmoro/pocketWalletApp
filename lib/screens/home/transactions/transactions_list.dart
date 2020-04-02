@@ -14,6 +14,7 @@ class TransactionsList extends StatefulWidget {
 
 //String source, double value, int month, int year
 class TransactionsState extends State {
+
   List<Transaction> transactionList = [
     Expense(ExpenseType.GYM, 120.0, 1, 20),
     Income('aisdjij', 120.0, 1, 20),
@@ -77,12 +78,6 @@ class TransactionCard extends StatelessWidget {
   }
 
   Icon getIconAccordingToTransactionType() {
-    Icon iconDefined = Icon(Icons.data_usage, color: Colors.transparent);
-    if(_item is Income){
-      iconDefined = Icon(Icons.transit_enterexit, color: Colors.green);
-    } else if(_item is Expense){
-      iconDefined = Icon(Icons.call_missed_outgoing, color: Colors.red);
-    }
-    return iconDefined;
+    return Icon(_item.icon(), color:  _item.color());
   }
 }

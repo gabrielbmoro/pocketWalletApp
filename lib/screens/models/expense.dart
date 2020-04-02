@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-
+import 'package:flutter/material.dart';
 import 'expense_type.dart';
 import 'transaction.dart';
 
@@ -18,4 +17,15 @@ class Expense extends Transaction {
   String description() {
     return expenseType.description;
   }
+
+  @override
+  Color color() {
+    return Colors.red;
+  }
+
+  @override
+  IconData icon() {
+    return Icons.call_missed_outgoing;
+  }
+
 }

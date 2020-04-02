@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
-
+import 'dart:ui';
+import 'package:flutter/material.dart';
 import 'transaction.dart';
 
 class Income extends Transaction {
@@ -15,6 +15,16 @@ class Income extends Transaction {
   @override
   String description() {
     return source;
+  }
+
+  @override
+  Color color() {
+   return Colors.green;
+  }
+
+  @override
+  IconData icon() {
+    return Icons.transit_enterexit;
   }
 
 }
