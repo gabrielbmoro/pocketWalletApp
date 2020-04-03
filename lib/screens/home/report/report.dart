@@ -3,6 +3,7 @@ import 'package:pocketwallet/screens/models/expense.dart';
 import 'package:pocketwallet/screens/models/expense_type.dart';
 import 'package:pocketwallet/screens/models/income.dart';
 import 'package:pocketwallet/screens/models/transaction.dart';
+import 'package:pocketwallet/screens/util/media_query.dart';
 
 class Report extends StatelessWidget {
   @override
@@ -11,7 +12,11 @@ class Report extends StatelessWidget {
       width: 200,
       height: 200,
       child: CustomPaint(
-        painter: LineReportChart(),
+        painter: LineReportChart(
+          screenWidth(
+            context,
+          ),
+        ),
       ),
     );
   }
@@ -27,15 +32,16 @@ class LineReportChart extends CustomPainter {
   ];
 
   final double barHeight = 48.0;
-  final double marginStart = 24.0;
+  final double horizontalMargin = 24.0;
   final double marginTop = 48.0;
-  final double maxBarWidth = 500.0;
   final double marginSpaceBetweenTheLines = 8;
   final double strokeWidth = 4;
+  final double screenWidth;
+
+  LineReportChart(this.screenWidth);
 
   @override
   void paint(Canvas canvas, Size size) {
-
     double totalExpensesValue = 0.0;
     double totalIncomeValue = 0.0;
 
@@ -48,8 +54,22 @@ class LineReportChart extends CustomPainter {
       x++;
     }
 
-   drawRect(
-      x0: marginStart,
+    drawRectMaxWidth(
+      x0: horizontalMargin,
+      y0: marginTop,
+      canvas: canvas,
+      rectColor: Colors.grey[300],
+    );
+
+    drawRectMaxWidth(
+      x0: horizontalMargin,
+      y0: marginTop + barHeight + marginSpaceBetweenTheLines,
+      canvas: canvas,
+      rectColor: Colors.grey[300],
+    );
+
+    drawRect(
+      x0: horizontalMargin,
       y0: marginTop,
       totalValue: totalExpensesValue,
       canvas: canvas,
@@ -57,7 +77,7 @@ class LineReportChart extends CustomPainter {
     );
 
     drawRect(
-      x0: marginStart,
+      x0: horizontalMargin,
       y0: marginTop + barHeight + marginSpaceBetweenTheLines,
       totalValue: totalIncomeValue,
       canvas: canvas,
@@ -72,7 +92,23 @@ class LineReportChart extends CustomPainter {
       @required Canvas canvas,
       @required Color rectColor}) {
     Offset off1 = Offset(x0, y0);
-    Offset off2 = Offset((totalValue / maxBarWidth) * 100.0, barHeight+y0);
+    Offset off2 =
+        Offset((totalValue / getMaxBarWidth()) * 100.0, barHeight + y0);
+    canvas.drawRect(
+      Rect.fromPoints(off1, off2),
+      Paint()
+        ..color = rectColor
+        ..strokeWidth = strokeWidth,
+    );
+  }
+
+  void drawRectMaxWidth(
+      {@required double x0,
+      @required double y0,
+      @required Canvas canvas,
+      @required Color rectColor}) {
+    Offset off1 = Offset(x0, y0);
+    Offset off2 = Offset(getMaxBarWidth(), barHeight + y0);
     canvas.drawRect(
       Rect.fromPoints(off1, off2),
       Paint()
@@ -84,5 +120,9 @@ class LineReportChart extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
+  }
+
+  double getMaxBarWidth() {
+    return screenWidth - horizontalMargin;
   }
 }
