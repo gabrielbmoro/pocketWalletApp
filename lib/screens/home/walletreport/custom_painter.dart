@@ -6,12 +6,15 @@ import 'package:pocketwallet/screens/models/transaction.dart';
 import 'package:pocketwallet/screens/util/currency.dart';
 import 'package:flutter/material.dart';
 
-class LineReportChart extends CustomPainter {
+class LineChartPainter extends CustomPainter {
   // data to show
   final List<Transaction> _transactionList;
 
   // screen width
   final double _screenWidth;
+
+  // animationController
+  final double _fraction;
 
   //constants
   final double _barHeight = 48.0;
@@ -26,10 +29,11 @@ class LineReportChart extends CustomPainter {
   final double _labelFontSize = 18.0;
   final double _labelMarginStart = 12.0;
 
-  LineReportChart(this._screenWidth, this._transactionList);
+  LineChartPainter(this._screenWidth, this._transactionList, this._fraction);
 
   @override
   void paint(Canvas canvas, Size size) {
+    print('Fração -> $_fraction');
     double totalExpensesValue = 0.0;
     double totalIncomeValue = 0.0;
 
@@ -57,12 +61,13 @@ class LineReportChart extends CustomPainter {
     double maxValue = max(totalIncomeValue, totalExpensesValue);
 
     drawRect(
-      x0: _horizontalMargin,
-      y0: _marginTop,
-      totalValue: totalExpensesValue,
-      canvas: canvas,
-      rectColor: _expensesBarBackground,
-      maxValue: maxValue,
+        x0: _horizontalMargin,
+        y0: _marginTop,
+        totalValue: totalExpensesValue,
+        canvas: canvas,
+        rectColor: _expensesBarBackground,
+        maxValue: maxValue,
+        currentFraction: _fraction,
     );
 
     drawRect(
@@ -72,6 +77,7 @@ class LineReportChart extends CustomPainter {
       canvas: canvas,
       rectColor: _incomesBarBackground,
       maxValue: maxValue,
+      currentFraction: _fraction,
     );
   }
 
@@ -82,13 +88,13 @@ class LineReportChart extends CustomPainter {
     @required Canvas canvas,
     @required Color rectColor,
     @required double maxValue,
+    @required double currentFraction,
   }) {
     Offset off0 = Offset(x0, y0);
 
     double x1 = totalValue / maxValue == 1
         ? getMaxBarWidth()
         : (totalValue / maxValue) * getMaxBarWidth();
-
     double y1 = _barHeight + y0;
     Offset off1 = Offset(x1, y1);
 
@@ -125,7 +131,8 @@ class LineReportChart extends CustomPainter {
     );
 
     double offSetLabelY = ((off0.dy + off1.dy) / 2);
-    Offset offSetLabel = Offset(off0.dx + _labelMarginStart, offSetLabelY - (_labelFontSize / 2.0));
+    Offset offSetLabel = Offset(
+        off0.dx + _labelMarginStart, offSetLabelY - (_labelFontSize / 2.0));
 
     tp.layout();
 
@@ -150,8 +157,8 @@ class LineReportChart extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
+  bool shouldRepaint(LineChartPainter oldDelegate) {
+    return oldDelegate._fraction != _fraction;
   }
 
   double getMaxBarWidth() {
