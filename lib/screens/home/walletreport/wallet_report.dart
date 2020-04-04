@@ -6,13 +6,10 @@ import 'package:pocketwallet/screens/models/transaction.dart';
 import 'package:pocketwallet/screens/util/media_query.dart';
 import 'line_report_chart.dart';
 
-class Report extends StatelessWidget {
+class WalletReport extends StatelessWidget {
   List<Transaction> _transactionList = [
-    Income('aisdjij', 100.0, 1, 20),
-    Income('aisdjij', 100.0, 1, 20),
-    Expense(ExpenseType.TRANSPORT, 8000.0, 1, 20),
-    Income('aisdjij', 4000.0, 1, 20),
-    Income('asdasd', 100.0, 1, 20),
+    Income('aisdjij', 80.0, 1, 20),
+    Expense(ExpenseType.TRANSPORT, 80.0, 1, 20),
   ];
 
   @override
