@@ -13,10 +13,12 @@ class WalletReport extends StatefulWidget {
 
 class _WalletReportState extends State<WalletReport>
     with SingleTickerProviderStateMixin {
+  final int _animationDuration = 3000;
+
   double _fraction = 0.0;
   Animation<double> animation;
   List<Transaction> _transactionList = [
-    Income('aisdjij', 80.0, 1, 20),
+    Income('aisdjij', 160.0, 1, 20),
     Expense(ExpenseType.TRANSPORT, 80.0, 1, 20),
   ];
 
@@ -24,7 +26,10 @@ class _WalletReportState extends State<WalletReport>
   void initState() {
     super.initState();
     var controller = AnimationController(
-        duration: Duration(milliseconds: 1000), vsync: this);
+        duration: Duration(
+          milliseconds: _animationDuration,
+        ),
+        vsync: this);
     animation = Tween(begin: 0.0, end: 1.0).animate(controller)
       ..addListener(() {
         setState(() {
@@ -40,23 +45,13 @@ class _WalletReportState extends State<WalletReport>
       width: 200,
       height: 200,
       child: CustomPaint(
-          painter: LineChartPainter(
+        painter: LineChartPainter(
             screenWidth(
               context,
             ),
             _transactionList,
-            _fraction
-          ),
-        ),
+            _fraction),
+      ),
     );
   }
 }
-
-/*CustomPaint(painter:
-        LineReportChart(
-          screenWidth(
-            context,
-          ),
-          _transactionList,
-          _fraction,
-        )*/

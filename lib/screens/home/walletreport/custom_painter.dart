@@ -7,6 +7,7 @@ import 'package:pocketwallet/screens/util/currency.dart';
 import 'package:flutter/material.dart';
 
 class LineChartPainter extends CustomPainter {
+
   // data to show
   final List<Transaction> _transactionList;
 
@@ -33,7 +34,8 @@ class LineChartPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    print('Fração -> $_fraction');
+    debugPrint('Fração -> $_fraction');
+
     double totalExpensesValue = 0.0;
     double totalIncomeValue = 0.0;
 
@@ -61,12 +63,12 @@ class LineChartPainter extends CustomPainter {
     double maxValue = max(totalIncomeValue, totalExpensesValue);
 
     drawRect(
-        x0: _horizontalMargin,
-        y0: _marginTop,
-        totalValue: totalExpensesValue,
-        canvas: canvas,
-        rectColor: _expensesBarBackground,
-        maxValue: maxValue,
+      x0: _horizontalMargin,
+      y0: _marginTop,
+      totalValue: totalExpensesValue,
+      canvas: canvas,
+      rectColor: _expensesBarBackground,
+      maxValue: maxValue,
     );
 
     drawRect(
@@ -93,7 +95,7 @@ class LineChartPainter extends CustomPainter {
         ? getMaxBarWidth()
         : (totalValue / maxValue) * getMaxBarWidth();
     double y1 = _barHeight + y0;
-    Offset off1 = Offset(x1, y1);
+    Offset off1 = Offset(x1 * _fraction, y1);
 
     canvas.drawRect(
       Rect.fromPoints(off0, off1),
