@@ -67,7 +67,6 @@ class LineChartPainter extends CustomPainter {
         canvas: canvas,
         rectColor: _expensesBarBackground,
         maxValue: maxValue,
-        currentFraction: _fraction,
     );
 
     drawRect(
@@ -77,7 +76,6 @@ class LineChartPainter extends CustomPainter {
       canvas: canvas,
       rectColor: _incomesBarBackground,
       maxValue: maxValue,
-      currentFraction: _fraction,
     );
   }
 
@@ -88,7 +86,6 @@ class LineChartPainter extends CustomPainter {
     @required Canvas canvas,
     @required Color rectColor,
     @required double maxValue,
-    @required double currentFraction,
   }) {
     Offset off0 = Offset(x0, y0);
 
