@@ -13,13 +13,18 @@ class WalletReport extends StatefulWidget {
 
 class _WalletReportState extends State<WalletReport>
     with SingleTickerProviderStateMixin {
+
   final int _animationDuration = 3000;
+  final double _height = 180.0;
 
   double _fraction = 0.0;
-  Animation<double> animation;
+  Animation<double> _animation;
   List<Transaction> _transactionList = [
-    Income('aisdjij', 160.0, 1, 20),
-    Expense(ExpenseType.TRANSPORT, 80.0, 1, 20),
+    Expense(ExpenseType.GYM, 120.0, 1, 20),
+    Income('aisdjij', 120.0, 1, 20),
+    Expense(ExpenseType.TRANSPORT, 120.0, 1, 20),
+    Income('aisdjij', 120.0, 1, 20),
+    Income('aisdjij', 120.0, 1, 20),
   ];
 
   @override
@@ -30,10 +35,10 @@ class _WalletReportState extends State<WalletReport>
           milliseconds: _animationDuration,
         ),
         vsync: this);
-    animation = Tween(begin: 0.0, end: 1.0).animate(controller)
+    _animation = Tween(begin: 0.0, end: 1.0).animate(controller)
       ..addListener(() {
         setState(() {
-          _fraction = animation.value;
+          _fraction = _animation.value;
         });
       });
     controller.forward();
@@ -41,16 +46,16 @@ class _WalletReportState extends State<WalletReport>
 
   @override
   Widget build(BuildContext context) {
+    double width = screenWidth(context);
     return Container(
-      width: 200,
-      height: 200,
+      width: width,
+      height: _height,
       child: CustomPaint(
         painter: LineChartPainter(
-            screenWidth(
-              context,
-            ),
-            _transactionList,
-            _fraction),
+          width,
+          _transactionList,
+          _fraction,
+        ),
       ),
     );
   }

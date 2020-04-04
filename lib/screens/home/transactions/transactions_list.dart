@@ -15,7 +15,7 @@ class TransactionsList extends StatefulWidget {
 //String source, double value, int month, int year
 class TransactionsState extends State {
 
-  List<Transaction> transactionList = [
+  List<Transaction> _transactionList = [
     Expense(ExpenseType.GYM, 120.0, 1, 20),
     Income('aisdjij', 120.0, 1, 20),
     Expense(ExpenseType.TRANSPORT, 120.0, 1, 20),
@@ -26,10 +26,13 @@ class TransactionsState extends State {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return TransactionCard(transactionList[index]);
+        return TransactionCard(_transactionList[index]);
       },
-      itemCount: transactionList.length,
+      itemCount: _transactionList.length,
     );
   }
 }

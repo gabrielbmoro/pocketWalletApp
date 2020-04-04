@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:pocketwallet/screens/home/transactions/transactions_list.dart';
 import 'walletreport/wallet_report.dart';
 
 const String HOME_PAGE_TITLE = 'Carteira de Bolso';
@@ -14,7 +15,14 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(HOME_PAGE_TITLE),
       ),
-      body: WalletReport(),
+      body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              WalletReport(),
+              TransactionsList(),
+            ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: ()=> {
