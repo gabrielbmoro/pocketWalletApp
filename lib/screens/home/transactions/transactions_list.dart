@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pocketwallet/screens/models/expense.dart';
-import 'package:pocketwallet/screens/models/expense_type.dart';
-import 'package:pocketwallet/screens/models/income.dart';
-import 'package:pocketwallet/screens/models/transaction.dart';
-import 'package:pocketwallet/screens/util/currency.dart';
+import 'package:pocketwallet/models/expense.dart';
+import 'package:pocketwallet/models/expense_type.dart';
+import 'package:pocketwallet/models/income.dart';
+import 'package:pocketwallet/models/transaction.dart';
+import 'package:pocketwallet/util/currency.dart';
 
 class TransactionsList extends StatefulWidget {
   @override

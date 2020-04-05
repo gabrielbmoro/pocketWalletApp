@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:pocketwallet/screens/util/date.dart';
+import 'package:pocketwallet/util/date.dart';
 
 enum TransactionType { INCOME, EXPENSE, UNDEFINED }
 
