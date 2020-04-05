@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'expense_type.dart';
 import 'transaction.dart';
 
-class Expense extends Transaction {
-
+class Expense extends PocketWalletTransaction {
   ExpenseType expenseType;
 
-  Expense(ExpenseType expenseType, double value, int month, int year){
+  Expense({
+    @required ExpenseType expenseType,
+    @required double value,
+    @required int month,
+    @required int year,
+  }) {
     this.expenseType = expenseType;
     super.value = value;
     super.month = month;
@@ -27,5 +31,4 @@ class Expense extends Transaction {
   IconData icon() {
     return Icons.call_missed_outgoing;
   }
-
 }

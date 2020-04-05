@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:pocketwallet/models/expense.dart';
-import 'package:pocketwallet/models/expense_type.dart';
-import 'package:pocketwallet/models/income.dart';
 import 'package:pocketwallet/models/transaction.dart';
 import 'package:pocketwallet/util/currency.dart';
 
 class TransactionsList extends StatefulWidget {
+  List<PocketWalletTransaction> _transactions;
+  TransactionsList(this._transactions);
+
   @override
   State<StatefulWidget> createState() {
-    return TransactionsState();
+    return TransactionsState(_transactions);
   }
 }
 
 //String source, double value, int month, int year
-class TransactionsState extends State {
+class TransactionsState extends State<TransactionsList> {
 
-  List<Transaction> _transactionList = [
-    Expense(ExpenseType.GYM, 120.0, 1, 20),
-    Income('aisdjij', 120.0, 1, 20),
-    Expense(ExpenseType.TRANSPORT, 120.0, 1, 20),
-    Income('aisdjij', 120.0, 1, 20),
-    Income('aisdjij', 120.0, 1, 20),
-  ];
+  List<PocketWalletTransaction> _transactions;
+
+  TransactionsState(this._transactions);
 
   @override
   Widget build(BuildContext context) {
@@ -30,15 +26,15 @@ class TransactionsState extends State {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return TransactionCard(_transactionList[index]);
+        return TransactionCard(_transactions[index]);
       },
-      itemCount: _transactionList.length,
+      itemCount: _transactions.length,
     );
   }
 }
 
 class TransactionCard extends StatelessWidget {
-  final Transaction _item;
+  final PocketWalletTransaction _item;
 
   TransactionCard(this._item);
 
@@ -81,6 +77,6 @@ class TransactionCard extends StatelessWidget {
   }
 
   Icon getIconAccordingToTransactionType() {
-    return Icon(_item.icon(), color:  _item.color());
+    return Icon(_item.icon(), color: _item.color());
   }
 }

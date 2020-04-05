@@ -2,10 +2,15 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'transaction.dart';
 
-class Income extends Transaction {
+class Income extends PocketWalletTransaction {
   String source;
 
-  Income(String source, double value, int month, int year) {
+  Income({
+    @required String source,
+    @required double value,
+    @required int month,
+    @required int year,
+  }) {
     this.source = source;
     super.value = value;
     super.month = month;
@@ -19,12 +24,11 @@ class Income extends Transaction {
 
   @override
   Color color() {
-   return Colors.green;
+    return Colors.green;
   }
 
   @override
   IconData icon() {
     return Icons.transit_enterexit;
   }
-
 }

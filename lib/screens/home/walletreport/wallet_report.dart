@@ -1,31 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:pocketwallet/models/expense.dart';
-import 'package:pocketwallet/models/expense_type.dart';
-import 'package:pocketwallet/models/income.dart';
 import 'package:pocketwallet/models/transaction.dart';
 import 'package:pocketwallet/util/media_query.dart';
 import 'custom_painter.dart';
 
 class WalletReport extends StatefulWidget {
+  List<PocketWalletTransaction> _transactions;
+
+  WalletReport(this._transactions);
+
   @override
-  _WalletReportState createState() => _WalletReportState();
+  _WalletReportState createState() => _WalletReportState(_transactions);
 }
 
 class _WalletReportState extends State<WalletReport>
     with SingleTickerProviderStateMixin {
-
   final int _animationDuration = 3000;
   final double _height = 180.0;
 
   double _fraction = 0.0;
   Animation<double> _animation;
-  List<Transaction> _transactionList = [
-    Expense(ExpenseType.GYM, 120.0, 1, 20),
-    Income('aisdjij', 120.0, 1, 20),
-    Expense(ExpenseType.TRANSPORT, 120.0, 1, 20),
-    Income('aisdjij', 120.0, 1, 20),
-    Income('aisdjij', 120.0, 1, 20),
-  ];
+  List<PocketWalletTransaction> _transactions;
+
+  _WalletReportState(this._transactions);
 
   @override
   void initState() {
@@ -53,7 +49,7 @@ class _WalletReportState extends State<WalletReport>
       child: CustomPaint(
         painter: LineChartPainter(
           width,
-          _transactionList,
+          _transactions,
           _fraction,
         ),
       ),

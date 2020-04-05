@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class LineChartPainter extends CustomPainter {
 
   // data to show
-  final List<Transaction> _transactionList;
+  final List<PocketWalletTransaction> _transactionList;
 
   // screen width
   final double _screenWidth;

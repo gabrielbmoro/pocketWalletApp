@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:pocketwallet/database/dao/transaction_dao.dart';
+import 'models/expense.dart';
+import 'models/expense_type.dart';
+import 'models/income.dart';
 import 'screens/home/home_page.dart';
 
 void main() => runApp(WalletPocketApp());
@@ -8,6 +11,52 @@ class WalletPocketApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    PocketWalletTransactionDao transactionDao = PocketWalletTransactionDao();
+    transactionDao.findAll().then((value) => {
+          if (value.length == 0)
+            {
+              transactionDao
+                  .save(
+                    Expense(
+                      expenseType: ExpenseType.GYM,
+                      value: 240.0,
+                      month: 2,
+                      year: 20,
+                    ),
+                  )
+                  .then((onValue) => {
+                        transactionDao.save(
+                          Expense(
+                            expenseType: ExpenseType.TRANSPORT,
+                            value: 120.0,
+                            month: 2,
+                            year: 20,
+                          ),
+                        )
+                      })
+                  .then((onValue) {
+                transactionDao
+                    .save(
+                      Income(
+                        source: 'aisdjij',
+                        value: 120.0,
+                        month: 1,
+                        year: 20,
+                      ),
+                    )
+                    .then((onValue) => {
+                          transactionDao.save(
+                            Income(
+                              source: 'aisdjij',
+                              value: 120.0,
+                              month: 1,
+                              year: 20,
+                            ),
+                          )
+                        });
+              })
+            }
+        });
     return MaterialApp(
       title: 'Wallet Pocket',
       theme: ThemeData(

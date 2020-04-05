@@ -5,7 +5,7 @@ import 'package:pocketwallet/util/date.dart';
 
 enum TransactionType { INCOME, EXPENSE, UNDEFINED }
 
-abstract class Transaction {
+abstract class PocketWalletTransaction {
 
   double value;
   TransactionType type;
