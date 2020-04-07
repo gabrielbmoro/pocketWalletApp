@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pocketwallet/util/date.dart';
 
-enum TransactionType { INCOME, EXPENSE, UNDEFINED }
+enum TransactionType { INCOME, EXPENSE }
 
 abstract class PocketWalletTransaction {
 

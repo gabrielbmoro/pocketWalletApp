@@ -6,12 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:pocketwallet/database/dao/transaction_dao.dart';
 import 'package:pocketwallet/models/transaction.dart';
 import 'package:pocketwallet/screens/home/transactions/transactions_list.dart';
+import 'package:pocketwallet/screens/transactionform/transaction_form.dart';
 import 'walletreport/wallet_report.dart';
 
 const String HOME_PAGE_TITLE = 'Carteira de Bolso';
+const String LOADING = 'Carregando';
+const String ERROR_MESSAGE = 'Ocorreu algum problema desconhecido';
 
 class HomePage extends StatelessWidget {
-
   PocketWalletTransactionDao _transactionDao = PocketWalletTransactionDao();
 
   @override
@@ -34,13 +36,14 @@ class HomePage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     CircularProgressIndicator(),
-                    Text('Carregando'),
+                    Text(LOADING),
                   ],
                 ));
               case ConnectionState.active:
                 break;
               case ConnectionState.done:
-                final List<PocketWalletTransaction> transactions = snapshot.data;
+                final List<PocketWalletTransaction> transactions =
+                    snapshot.data;
                 return SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
@@ -50,11 +53,17 @@ class HomePage extends StatelessWidget {
                   ),
                 );
             }
-            return Text('Ocorreu algum problema desconhecido');
+            return Text(ERROR_MESSAGE);
           }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => {},
+        onPressed: () => {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => NewTransaction(),
+            ),
+          )
+        },
       ),
     );
   }
