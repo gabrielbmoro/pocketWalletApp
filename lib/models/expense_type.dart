@@ -41,6 +41,19 @@ ExpenseType getExpenseType(int code) {
 }
 
 extension ExpenseTypeExtension on ExpenseType {
+
+  List<ExpenseType> values() {
+    return [
+      ExpenseType.HEALTH,
+      ExpenseType.HOUSE_RENT,
+      ExpenseType.SUPER_MARKET,
+      ExpenseType.PETS,
+      ExpenseType.TRAVEL,
+      ExpenseType.TRANSPORT,
+      ExpenseType.GYM,
+    ];
+  }
+
   String get description {
     switch (this) {
       case ExpenseType.PETS:

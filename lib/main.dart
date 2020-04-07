@@ -3,7 +3,8 @@ import 'package:pocketwallet/database/dao/transaction_dao.dart';
 import 'models/expense.dart';
 import 'models/expense_type.dart';
 import 'models/income.dart';
-import 'screens/home/home_page.dart';
+import 'presentation/home/home_page.dart';
+import 'presentation/strings.dart';
 
 void main() => runApp(WalletPocketApp());
 
@@ -58,7 +59,7 @@ class WalletPocketApp extends StatelessWidget {
             }
         });
     return MaterialApp(
-      title: 'Wallet Pocket',
+      title: APP_NAME,
       theme: ThemeData(
         // This is the theme of your application.
         //

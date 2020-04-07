@@ -5,13 +5,10 @@
 import 'package:flutter/material.dart';
 import 'package:pocketwallet/database/dao/transaction_dao.dart';
 import 'package:pocketwallet/models/transaction.dart';
-import 'package:pocketwallet/screens/home/transactions/transactions_list.dart';
-import 'package:pocketwallet/screens/transactionform/transaction_form.dart';
+import 'package:pocketwallet/presentation/home/transactions/transactions_list.dart';
+import 'package:pocketwallet/presentation/transactionform/transaction_form.dart';
+import '../strings.dart';
 import 'walletreport/wallet_report.dart';
-
-const String HOME_PAGE_TITLE = 'Carteira de Bolso';
-const String LOADING = 'Carregando';
-const String ERROR_MESSAGE = 'Ocorreu algum problema desconhecido';
 
 class HomePage extends StatelessWidget {
   PocketWalletTransactionDao _transactionDao = PocketWalletTransactionDao();
