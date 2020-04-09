@@ -63,14 +63,12 @@ class PocketWalletTransactionDao extends Dao<PocketWalletTransaction> {
           ),
         );
       } else if (transactionType == transactionExpenseType) {
-        transactions.add(
-          Expense(
-            expenseType: getExpenseType(row[_expenseType]),
-            value: value,
-            month: month,
-            year: year,
-          )
-        );
+        transactions.add(Expense(
+          expenseType: getExpenseType(row[_expenseType]),
+          value: value,
+          month: month,
+          year: year,
+        ));
       }
     }
     return transactions;

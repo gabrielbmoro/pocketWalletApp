@@ -1,6 +1,4 @@
-
-abstract class Dao<Model>{
-
+abstract class Dao<Model> {
   Map<String, dynamic> toMap(Model item);
 
   List<Model> toList(List<Map<String, dynamic>> result);
@@ -8,5 +6,4 @@ abstract class Dao<Model>{
   Future<List<Model>> findAll();
 
   Future<int> save(Model model);
-
 }

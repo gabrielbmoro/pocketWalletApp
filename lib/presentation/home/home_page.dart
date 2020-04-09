@@ -10,7 +10,12 @@ import 'package:pocketwallet/presentation/transactionform/transaction_form.dart'
 import '../strings.dart';
 import 'walletreport/wallet_report.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   PocketWalletTransactionDao _transactionDao = PocketWalletTransactionDao();
 
   @override
@@ -54,14 +59,19 @@ class HomePage extends StatelessWidget {
           }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => NewTransaction(),
-            ),
-          )
-        },
+        onPressed: () => {callNewTransactionScreen(context)},
       ),
     );
+  }
+
+  void callNewTransactionScreen(BuildContext context) async {
+    final int newElementId = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => NewTransaction(),
+      ),
+    );
+    if (newElementId != null) {
+      setState(() {});
+    }
   }
 }

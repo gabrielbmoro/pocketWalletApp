@@ -7,7 +7,6 @@ import 'package:pocketwallet/util/currency.dart';
 import 'package:flutter/material.dart';
 
 class LineChartPainter extends CustomPainter {
-
   // data to show
   final List<PocketWalletTransaction> _transactionList;
 

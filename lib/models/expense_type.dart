@@ -41,7 +41,6 @@ ExpenseType getExpenseType(int code) {
 }
 
 extension ExpenseTypeExtension on ExpenseType {
-
   List<ExpenseType> values() {
     return [
       ExpenseType.HEALTH,

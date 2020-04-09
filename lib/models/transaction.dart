@@ -6,7 +6,6 @@ import 'package:pocketwallet/util/date.dart';
 enum TransactionType { INCOME, EXPENSE }
 
 abstract class PocketWalletTransaction {
-
   double value;
   TransactionType type;
   int month = currentMonth();
@@ -17,5 +16,4 @@ abstract class PocketWalletTransaction {
   Color color();
 
   IconData icon();
-
 }

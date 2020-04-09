@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:pocketwallet/models/expense_type.dart';
 
-class ExpenseOptions extends StatefulWidget{
+class ExpenseOptions extends StatefulWidget {
+  ExpenseOptions({Key key}) : super(key: key);
+
   @override
-  _ExpenseOptionsState createState() => _ExpenseOptionsState();
+  ExpenseOptionsState createState() => ExpenseOptionsState();
 }
 
-class _ExpenseOptionsState extends State<ExpenseOptions> {
-
-  ExpenseType _expenseType = ExpenseType.values[0];
+class ExpenseOptionsState extends State<ExpenseOptions> {
+  ExpenseType expenseType = ExpenseType.values[0];
 
   List<DropdownMenuItem<ExpenseType>> _expenseTypeValues =
-  ExpenseType.values.map(
-        (item) {
+      ExpenseType.values.map(
+    (item) {
       return DropdownMenuItem<ExpenseType>(
           value: item, child: Text(item.description));
     },
@@ -28,10 +29,10 @@ class _ExpenseOptionsState extends State<ExpenseOptions> {
       style: TextStyle(color: Colors.deepPurple),
       onChanged: (ExpenseType expenseType) => {
         setState(() {
-          _expenseType = expenseType;
+          expenseType = expenseType;
         })
       },
-      value: _expenseType,
+      value: expenseType,
       icon: Icon(Icons.arrow_downward),
       iconSize: 24,
       elevation: 16,

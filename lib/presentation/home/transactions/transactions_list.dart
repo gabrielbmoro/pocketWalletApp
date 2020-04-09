@@ -13,7 +13,6 @@ class TransactionsList extends StatefulWidget {
   }
 }
 
-//String source, double value, int month, int year
 class TransactionsState extends State<TransactionsList> {
   List<PocketWalletTransaction> _transactions;
 
