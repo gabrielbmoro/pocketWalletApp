@@ -27,9 +27,9 @@ class ExpenseOptionsState extends State<ExpenseOptions> {
         color: Colors.deepPurpleAccent,
       ),
       style: TextStyle(color: Colors.deepPurple),
-      onChanged: (ExpenseType expenseType) => {
+      onChanged: (ExpenseType type) => {
         setState(() {
-          expenseType = expenseType;
+          this.expenseType = type;
         })
       },
       value: expenseType,
