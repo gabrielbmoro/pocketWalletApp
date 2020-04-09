@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pocketwallet/presentation/strings.dart';
 
 const PETS_CODE = 1;
 const SUPER_MARKET_CODE = 2;
@@ -56,19 +57,19 @@ extension ExpenseTypeExtension on ExpenseType {
   String get description {
     switch (this) {
       case ExpenseType.PETS:
-        return 'Animais';
+        return PETS;
       case ExpenseType.SUPER_MARKET:
-        return 'Supermercado';
+        return SUPER_MARKET;
       case ExpenseType.HEALTH:
-        return 'Health';
+        return HEALTH;
       case ExpenseType.GYM:
-        return 'Gym';
+        return GYM;
       case ExpenseType.TRANSPORT:
-        return 'Transporte';
+        return TRANSPORT;
       case ExpenseType.TRAVEL:
-        return 'Travel';
+        return TRAVEL;
       case ExpenseType.HOUSE_RENT:
-        return 'Aluguel';
+        return HOUSE_RENT;
       default:
         return null;
     }
