@@ -96,12 +96,14 @@ class LineChartPainter extends CustomPainter {
     double y1 = _barHeight + y0;
     Offset off1 = Offset(x1 * _fraction, y1);
 
-    canvas.drawRect(
-      Rect.fromPoints(off0, off1),
-      Paint()
-        ..color = rectColor
-        ..strokeWidth = _strokeWidth,
-    );
+    if(x1 > x0) {
+      canvas.drawRect(
+        Rect.fromPoints(off0, off1),
+        Paint()
+          ..color = rectColor
+          ..strokeWidth = _strokeWidth,
+      );
+    }
 
     drawBarLabel(totalValue, off0, off1, canvas);
   }
