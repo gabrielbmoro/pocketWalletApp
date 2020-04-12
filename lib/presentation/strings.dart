@@ -16,3 +16,4 @@ const String GYM = 'Academia';
 const String TRANSPORT = 'Transport';
 const String TRAVEL = 'Viagem';
 const String HOUSE_RENT = 'Aluguel';
+const String THERE_IS_NO_DATA = 'Nenhum dado registrado...';

@@ -32,39 +32,24 @@ class _HomePageState extends State<HomePage> {
               case ConnectionState.none:
                 break;
               case ConnectionState.waiting:
-                return Center(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    CircularProgressIndicator(),
-                    Text(LOADING),
-                  ],
-                ));
+                return _loadingWidget();
               case ConnectionState.active:
                 break;
               case ConnectionState.done:
-                final List<PocketWalletTransaction> transactions =
-                    snapshot.data;
-                return SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      WalletReport(transactions),
-                      TransactionsList(transactions),
-                    ],
-                  ),
-                );
+                return _bodyWidget(snapshot.data);
             }
             return Text(ERROR_MESSAGE);
           }),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => {callNewTransactionScreen(context)},
+        onPressed: () => {
+          _callNewTransactionScreen(context),
+        },
       ),
     );
   }
 
-  void callNewTransactionScreen(BuildContext context) async {
+  void _callNewTransactionScreen(BuildContext context) async {
     final int newElementId = await Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => NewTransaction(),
@@ -73,5 +58,36 @@ class _HomePageState extends State<HomePage> {
     if (newElementId != null) {
       setState(() {});
     }
+  }
+
+  Widget _bodyWidget(List<PocketWalletTransaction> transactions) {
+    if (transactions.isEmpty) {
+      return _emptyState();
+    } else {
+      return SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            WalletReport(transactions),
+            TransactionsList(transactions),
+          ],
+        ),
+      );
+    }
+  }
+
+  Widget _emptyState() {
+    return Center(child: Text(THERE_IS_NO_DATA));
+  }
+
+  Widget _loadingWidget() {
+    return Center(
+        child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        CircularProgressIndicator(),
+        Text(LOADING),
+      ],
+    ));
   }
 }
