@@ -50,8 +50,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _addNewTransactionEvent(BuildContext context){
-    _reportKey.currentState.stopAnimation();
+  void _addNewTransactionEvent(BuildContext context) {
+    if (_reportKey.currentState != null)
+      _reportKey.currentState.stopAnimation();
     _callNewTransactionScreen(context);
   }
 
