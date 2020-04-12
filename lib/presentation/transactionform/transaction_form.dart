@@ -33,30 +33,10 @@ class _NewTransactionState extends State<NewTransaction> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              TextField(
-                controller: _valueController,
-                keyboardType: TextInputType.numberWithOptions(
-                  signed: false,
-                  decimal: true,
-                ),
-                decoration: InputDecoration(
-                  labelText: VALUE,
-                ),
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
+              _buildValueTextField(),
               _buildTransactionTypes(),
               _buildPanelAccordingToTransactionType(),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: RaisedButton(
-                  onPressed: () => {submitForm()},
-                  color: Colors.deepOrangeAccent,
-                  textColor: Colors.white,
-                  child: Text(SAVE),
-                ),
-              ),
+              _buildSubmitFormButton(),
             ],
           ),
         ),
@@ -96,38 +76,77 @@ class _NewTransactionState extends State<NewTransaction> {
     }
   }
 
+  Widget _buildValueTextField() {
+    return TextField(
+      controller: _valueController,
+      keyboardType: TextInputType.numberWithOptions(
+        signed: false,
+        decimal: true,
+      ),
+      decoration: InputDecoration(
+        labelText: VALUE,
+      ),
+      style: TextStyle(
+        fontSize: 24,
+      ),
+    );
+  }
+
+  Widget _buildSubmitFormButton() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 40.0),
+      child: SizedBox(
+        height: 50,
+        child: RaisedButton(
+          onPressed: () => {submitForm()},
+          color: Colors.deepOrangeAccent,
+          child: Text(
+            SAVE,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20.0,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildTransactionTypes() {
-    return Row(
-      children: <Widget>[
-        Expanded(
-          child: ListTile(
-            title: const Text(INCOME),
-            leading: Radio(
-              value: TransactionType.INCOME,
-              groupValue: _type,
-              onChanged: (TransactionType value) {
-                setState(() {
-                  _type = value;
-                });
-              },
+    return Padding(
+      padding: const EdgeInsets.only(top: 32.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: ListTile(
+              title: const Text(INCOME),
+              leading: Radio(
+                value: TransactionType.INCOME,
+                groupValue: _type,
+                onChanged: (TransactionType value) {
+                  setState(() {
+                    _type = value;
+                  });
+                },
+              ),
             ),
           ),
-        ),
-        Expanded(
-          child: ListTile(
-            title: const Text(EXPENSE),
-            leading: Radio(
-              value: TransactionType.EXPENSE,
-              groupValue: _type,
-              onChanged: (TransactionType value) {
-                setState(() {
-                  _type = value;
-                });
-              },
+          Expanded(
+            child: ListTile(
+              title: const Text(EXPENSE),
+              leading: Radio(
+                value: TransactionType.EXPENSE,
+                groupValue: _type,
+                onChanged: (TransactionType value) {
+                  setState(() {
+                    _type = value;
+                  });
+                },
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
