@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PocketWalletTransactionDao _transactionDao = PocketWalletTransactionDao();
+  final _reportKey = new GlobalKey<WalletReportState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +44,15 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () => {
-          _callNewTransactionScreen(context),
+          _addNewTransactionEvent(context),
         },
       ),
     );
+  }
+
+  void _addNewTransactionEvent(BuildContext context){
+    _reportKey.currentState.stopAnimation();
+    _callNewTransactionScreen(context);
   }
 
   void _callNewTransactionScreen(BuildContext context) async {
@@ -67,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       return SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            WalletReport(transactions),
+            WalletReport(_reportKey, transactions),
             TransactionsList(transactions),
           ],
         ),
