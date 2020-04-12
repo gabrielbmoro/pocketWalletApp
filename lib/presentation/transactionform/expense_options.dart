@@ -24,9 +24,12 @@ class ExpenseOptionsState extends State<ExpenseOptions> {
     return DropdownButton<ExpenseType>(
       underline: Container(
         height: 2,
-        color: Colors.deepPurpleAccent,
+        color: Colors.black45,
       ),
-      style: TextStyle(color: Colors.deepPurple),
+      style: TextStyle(
+        fontSize: 24.0,
+        color: Colors.black45,
+      ),
       onChanged: (ExpenseType type) => {
         setState(() {
           this.expenseType = type;
@@ -34,7 +37,7 @@ class ExpenseOptionsState extends State<ExpenseOptions> {
       },
       value: expenseType,
       icon: Icon(Icons.arrow_downward),
-      iconSize: 24,
+      iconSize: 24.0,
       elevation: 16,
       items: _expenseTypeValues,
     );
