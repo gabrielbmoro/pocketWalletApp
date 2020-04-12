@@ -46,43 +46,14 @@ class _NewTransactionState extends State<NewTransaction> {
                   fontSize: 24,
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ListTile(
-                      title: const Text(INCOME),
-                      leading: Radio(
-                        value: TransactionType.INCOME,
-                        groupValue: _type,
-                        onChanged: (TransactionType value) {
-                          setState(() {
-                            _type = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: ListTile(
-                      title: const Text(EXPENSE),
-                      leading: Radio(
-                        value: TransactionType.EXPENSE,
-                        groupValue: _type,
-                        onChanged: (TransactionType value) {
-                          setState(() {
-                            _type = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              _buildTransactionTypes(),
               _buildPanelAccordingToTransactionType(),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
                 child: RaisedButton(
                   onPressed: () => {submitForm()},
+                  color: Colors.deepOrangeAccent,
+                  textColor: Colors.white,
                   child: Text(SAVE),
                 ),
               ),
@@ -123,6 +94,41 @@ class _NewTransactionState extends State<NewTransaction> {
             .then((result) => {Navigator.pop(context, result)});
       }
     }
+  }
+
+  Widget _buildTransactionTypes() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: ListTile(
+            title: const Text(INCOME),
+            leading: Radio(
+              value: TransactionType.INCOME,
+              groupValue: _type,
+              onChanged: (TransactionType value) {
+                setState(() {
+                  _type = value;
+                });
+              },
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListTile(
+            title: const Text(EXPENSE),
+            leading: Radio(
+              value: TransactionType.EXPENSE,
+              groupValue: _type,
+              onChanged: (TransactionType value) {
+                setState(() {
+                  _type = value;
+                });
+              },
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildPanelAccordingToTransactionType() {
