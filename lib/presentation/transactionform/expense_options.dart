@@ -23,25 +23,31 @@ class ExpenseOptionsState extends State<ExpenseOptions> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<ExpenseType>(
-      underline: Container(
-        height: 2,
-        color: Colors.black45,
-      ),
-      style: TextStyle(
-        fontSize: 24.0,
-        color: Colors.black45,
-      ),
-      onChanged: (ExpenseType type) => {
-        setState(() {
-          this.expenseType = type;
-        })
-      },
-      value: expenseType,
-      icon: Icon(Icons.arrow_downward),
-      iconSize: 24.0,
-      elevation: 16,
-      items: _expenseTypeValues,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        DropdownButton<ExpenseType>(
+          underline: Container(
+            height: 2,
+            color: Colors.black45,
+          ),
+          style: TextStyle(
+            fontSize: 24.0,
+            color: Colors.black45,
+          ),
+          onChanged: (ExpenseType type) => {
+            setState(() {
+              this.expenseType = type;
+            })
+          },
+          value: expenseType,
+          icon: Icon(Icons.arrow_downward),
+          iconSize: 24.0,
+          elevation: 16,
+          items: _expenseTypeValues,
+        ),
+      ],
     );
   }
 }
