@@ -15,7 +15,9 @@ class ExpenseOptionsState extends State<ExpenseOptions> {
       ExpenseType.values.map(
     (item) {
       return DropdownMenuItem<ExpenseType>(
-          value: item, child: Text(item.description));
+        value: item,
+        child: Text(item.description),
+      );
     },
   ).toList();
 
