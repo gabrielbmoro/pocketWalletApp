@@ -5,4 +5,4 @@
 
 ## Teaser
 
-![alt text](https://github.com/tido4410/moviedatabaseapi/blob/master/img/teaser.gif)
+(Construir)
