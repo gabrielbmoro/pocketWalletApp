@@ -5,4 +5,4 @@
 
 ## Teaser
 
-(Doing)
+![alt text](https://github.com/gabrielbmoro/pocket_wallet_app/blob/master/img/pocketwallet_teaser.gif)
